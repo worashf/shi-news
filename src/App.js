@@ -39,6 +39,7 @@ function App() {
     return (
       <Col key={index}>
         <Headline
+          className="my-3"
           title={title}
           description={description}
           urlToImage={urlToImage}
@@ -86,8 +87,10 @@ function App() {
         </Container>
       </Navbar>
 
-      <header className="App-header">
-        <Row>{state.articles.map(getHeadline)}</Row>
+      <header className="App-header ">
+        <Container fluid className="mt-3">
+          <Row>{state.articles.map(getHeadline)}</Row>
+        </Container>
       </header>
     </div>
   );

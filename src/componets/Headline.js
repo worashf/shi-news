@@ -5,11 +5,15 @@ import { Button, Card } from 'react-bootstrap';
 
 const Headline = ({ title, description, urlToImage }) => (
   <div>
-    <Card style={{ width: '20rem' }}>
-      <Card.Img variant="top" src={urlToImage} />
+    <Card style={{ width: '23rem' }} className="mt-2">
+      <Card.Img
+        variant="top"
+        src={urlToImage}
+        style={{ width: '100%', height: '15rem' }}
+      />
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Card.Text>{description}</Card.Text>
+        <Card.Title>{title ? title.substr(0, 50) : ''}</Card.Title>
+        <Card.Text>{description ? description.substr(0, 60) : ''}</Card.Text>
         <Button variant="primary">Go somewhere</Button>
       </Card.Body>
     </Card>
