@@ -7,6 +7,7 @@ import {
   BrowserRouter as Router, Routes, Route, Link,
 } from 'react-router-dom';
 import Headline from './componets/Headline';
+import FullArticle from './componets/FullArticle';
 import './App.css';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           title={title}
           description={description}
           urlToImage={urlToImage}
+          article={article}
         />
       </Col>
     );
@@ -80,7 +82,10 @@ function App() {
                   <Link to="/">Home</Link>
                 </Nav.Link>
                 {' '}
-                <Nav.Link>Favorite</Nav.Link>
+                <Nav.Link>
+                  {' '}
+                  <Link to="/favorite">Favorite</Link>
+                </Nav.Link>
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                   <NavDropdown.Item>Action</NavDropdown.Item>
                   <NavDropdown.Item>Another action</NavDropdown.Item>
@@ -105,6 +110,7 @@ function App() {
             >
               {' '}
             </Route>
+            <Route path="/full-article" element={<FullArticle />} />
           </Routes>
         </header>
       </div>
