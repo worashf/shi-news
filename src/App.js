@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {
   Nav, Navbar, NavDropdown, Container, Row, Col,
 } from 'react-bootstrap';
+
+import {
+  BrowserRouter as Router, Routes, Route, Link,
+} from 'react-router-dom';
 import Headline from './componets/Headline';
+import FullArticle from './componets/FullArticle';
 import './App.css';
 
 function App() {
@@ -43,6 +48,7 @@ function App() {
           title={title}
           description={description}
           urlToImage={urlToImage}
+          article={article}
         />
       </Col>
     );
@@ -60,39 +66,55 @@ function App() {
     return <div className="text-info">Loding...</div>;
   }
   return (
-    <div className="App">
-      <Navbar bg="light" expand="lg">
-        <Container>
-          <Navbar.Brand href="#home">Shi News</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Favorite</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+    <Router>
+      <div className="App">
+        <Navbar bg="light" expand="lg">
+          <Container>
+            <Navbar.Brand>
+              {' '}
+              <Link to="/">Shi News </Link>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link>
+                  {' '}
+                  <Link to="/">Home</Link>
+                </Nav.Link>
+                {' '}
+                <Nav.Link>
+                  {' '}
+                  <Link to="/favorite">Favorite</Link>
+                </Nav.Link>
+                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                  <NavDropdown.Item>Action</NavDropdown.Item>
+                  <NavDropdown.Item>Another action</NavDropdown.Item>
+                  <NavDropdown.Item>Something</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item>Separated link</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
 
-      <header className="App-header ">
-        <Container fluid className="mt-3">
-          <Row>{state.articles.map(getHeadline)}</Row>
-        </Container>
-      </header>
-    </div>
+        <header className="App-header ">
+          <Routes>
+            <Route
+              path="/"
+              element={(
+                <Container fluid className="mt-3">
+                  <Row>{state.articles.map(getHeadline)}</Row>
+                </Container>
+              )}
+            >
+              {' '}
+            </Route>
+            <Route path="/full-article" element={<FullArticle />} />
+          </Routes>
+        </header>
+      </div>
+    </Router>
   );
 }
 
