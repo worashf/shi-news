@@ -1,10 +1,50 @@
-import './App.css';
+import React, { useState, useEffect } from 'react';
 import {
   Nav, Navbar, NavDropdown, Container,
 } from 'react-bootstrap';
 import Headline from './componets/Headline';
+import './App.css';
 
 function App() {
+  const [state, setState] = useState({
+    articles: [],
+    error: null,
+    loading: false,
+  });
+  console.log(state.articles);
+  const getArticles = async () => {
+    const response = await fetch(
+      'https://newsapi.org/v2/top-headlines?country=us&apiKey=5d30a5ab65764ba0a6694020cf885380',
+    );
+    const result = await response.json();
+
+    if (result.status === 'ok') {
+      setState({
+        articles: result.articles,
+        loading: true,
+      });
+    } else {
+      setState({
+        error: result.message,
+        loading: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    getArticles();
+  }, []);
+  if (state.error) {
+    return (
+      <div>
+        Error:
+        {state.error}
+      </div>
+    );
+  }
+  if (!state.loading) {
+    return <div className="text-info">Loding...</div>;
+  }
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
