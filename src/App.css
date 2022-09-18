@@ -1,7 +1,8 @@
 
- a {
+a {
   text-decoration: none;
- }
+}
+
 .App {
   text-align: center;
 }
@@ -36,6 +37,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
