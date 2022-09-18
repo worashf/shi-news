@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Nav, Navbar, NavDropdown, Container,
+  Nav, Navbar, NavDropdown, Container, Row, Col,
 } from 'react-bootstrap';
 import Headline from './componets/Headline';
 import './App.css';
@@ -34,6 +34,19 @@ function App() {
   useEffect(() => {
     getArticles();
   }, []);
+  const getHeadline = (article, index) => {
+    const { title, description, urlToImage } = article;
+    return (
+      <Col key={index}>
+        <Headline
+          title={title}
+          description={description}
+          urlToImage={urlToImage}
+        />
+      </Col>
+    );
+  };
+
   if (state.error) {
     return (
       <div>
@@ -74,7 +87,7 @@ function App() {
       </Navbar>
 
       <header className="App-header">
-        <Headline />
+        <Row>{state.articles.map(getHeadline)}</Row>
       </header>
     </div>
   );
