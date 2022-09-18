@@ -14,7 +14,7 @@ const Headline = ({ title, description, urlToImage }) => (
       <Card.Body>
         <Card.Title>{title ? title.substr(0, 50) : ''}</Card.Title>
         <Card.Text>{description ? description.substr(0, 60) : ''}</Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="primary">Read More</Button>
       </Card.Body>
     </Card>
   </div>
