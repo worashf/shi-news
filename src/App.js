@@ -10,6 +10,7 @@ import Headline from './componets/Headline';
 import FullArticle from './componets/FullArticle';
 import './App.css';
 
+/* eslint-disable */
 function App() {
   const [state, setState] = useState({
     articles: [],
@@ -19,7 +20,7 @@ function App() {
   console.log(state.articles);
   const getArticles = async () => {
     const response = await fetch(
-      'https://newsapi.org/v2/top-headlines?country=us&apiKey=5d30a5ab65764ba0a6694020cf885380',
+      'https://newsapi.org/v2/top-headlines?country=us&apiKey=5d30a5ab65764ba0a6694020cf885380'
     );
     const result = await response.json();
 
@@ -40,7 +41,9 @@ function App() {
     getArticles();
   }, []);
   const getHeadline = (article, index) => {
-    const { title, description, urlToImage } = article;
+    article.id = Math.random();
+    const { title, description, urlToImage, id } = article;
+
     return (
       <Col key={index}>
         <Headline
@@ -49,6 +52,7 @@ function App() {
           description={description}
           urlToImage={urlToImage}
           article={article}
+          id={id}
         />
       </Col>
     );
@@ -80,8 +84,7 @@ function App() {
                 <Nav.Link>
                   {' '}
                   <Link to="/">Home</Link>
-                </Nav.Link>
-                {' '}
+                </Nav.Link>{' '}
                 <Nav.Link>
                   {' '}
                   <Link to="/favorite">Favorite</Link>
@@ -102,15 +105,15 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={(
+              element={
                 <Container fluid className="mt-3">
                   <Row>{state.articles.map(getHeadline)}</Row>
                 </Container>
-              )}
+              }
             >
               {' '}
             </Route>
-            <Route path="/full-article" element={<FullArticle />} />
+            <Route path="/full-article/:id" element={<FullArticle />} />
           </Routes>
         </header>
       </div>
