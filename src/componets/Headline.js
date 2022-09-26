@@ -6,7 +6,6 @@ import { Card } from 'react-bootstrap';
 /* eslint-disable */
 
 const Headline = ({ title, description, urlToImage, article, id }) => {
-  console.log(article);
   return (
     <div>
       <Card style={{ width: '23rem' }} className="mt-2">
