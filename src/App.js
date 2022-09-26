@@ -1,47 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   Nav, Navbar, NavDropdown, Container, Row, Col,
 } from 'react-bootstrap';
 
-import {
-  BrowserRouter as Router, Routes, Route, Link,
-} from 'react-router-dom';
+/* eslint-disable */
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Headline from './componets/Headline';
 import FullArticle from './componets/FullArticle';
+import { getArticles } from './redux/articles/articles';
 import './App.css';
 
-/* eslint-disable */
 function App() {
-  const [state, setState] = useState({
-    articles: [],
-    error: null,
-    loading: false,
-  });
-  console.log(state.articles);
-  const getArticles = async () => {
-    const response = await fetch(
-      'https://newsapi.org/v2/top-headlines?country=us&apiKey=5d30a5ab65764ba0a6694020cf885380'
-    );
-    const result = await response.json();
-
-    if (result.status === 'ok') {
-      setState({
-        articles: result.articles,
-        loading: true,
-      });
-    } else {
-      setState({
-        error: result.message,
-        loading: true,
-      });
-    }
-  };
+  const articles = useSelector((state) => state.articles);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getArticles();
+    dispatch(getArticles());
   }, []);
   const getHeadline = (article, index) => {
-    article.id = Math.random();
     const { title, description, urlToImage, id } = article;
 
     return (
@@ -58,17 +35,6 @@ function App() {
     );
   };
 
-  if (state.error) {
-    return (
-      <div>
-        Error:
-        {state.error}
-      </div>
-    );
-  }
-  if (!state.loading) {
-    return <div className="text-info">Loding...</div>;
-  }
   return (
     <Router>
       <div className="App">
@@ -107,7 +73,7 @@ function App() {
               path="/"
               element={
                 <Container fluid className="mt-3">
-                  <Row>{state.articles.map(getHeadline)}</Row>
+                  <Row>{articles.map(getHeadline)}</Row>
                 </Container>
               }
             >
