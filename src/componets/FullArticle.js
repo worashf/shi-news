@@ -1,16 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Card } from 'react-bootstrap';
 /*  eslint-disable */
-const FullArticle = (props) => {
+
+const FullArticle = () => {
   const { id } = useParams();
-  console.log(id);
+  const articles = useSelector((state) => state.articles.articles);
+  const article = articles.find((a) => a.id === id);
+  const { title, description, urlToImage } = article;
   return (
-    <>
-      <h3>{id}</h3>
-      <p />
-      <p />
-    </>
+    <div className="container">
+      <Link to="/" className="btn btn-primary my-3">
+        Back{' '}
+      </Link>
+      <Card>
+        <Card.Img variant="top" src={urlToImage} />
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+          <Card.Text>{description}</Card.Text>
+        </Card.Body>
+      </Card>
+    </div>
   );
 };
 
