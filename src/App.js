@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Nav, Navbar, NavDropdown, Container, Row, Col,
+  Nav, Navbar, Container, Row, Col,
 } from 'react-bootstrap';
 
 /* eslint-disable */
@@ -12,27 +12,35 @@ import { getArticles } from './redux/articles/articles';
 import './App.css';
 
 function App() {
-  const articles = useSelector((state) => state.articles);
-  const dispatch = useDispatch();
+  const data = useSelector((state) => state.articles);
+  const { articles, loading, error } = data;
 
+  const dispatch = useDispatch();
+  console.log(articles, 'text');
   useEffect(() => {
     dispatch(getArticles());
   }, []);
   const getHeadline = (article, index) => {
     const { title, description, urlToImage, id } = article;
 
-    return (
-      <Col key={index}>
-        <Headline
-          className="my-3"
-          title={title}
-          description={description}
-          urlToImage={urlToImage}
-          article={article}
-          id={id}
-        />
-      </Col>
-    );
+    if (loading) {
+      return <div className="text-info"> loadding...</div>;
+    } else if (error) {
+      return <div className="text-danger"> Something is wrong</div>;
+    } else {
+      return (
+        <Col key={index}>
+          <Headline
+            className="my-3"
+            title={title}
+            description={description}
+            urlToImage={urlToImage}
+            article={article}
+            id={id}
+          />
+        </Col>
+      );
+    }
   };
 
   return (
@@ -55,13 +63,6 @@ function App() {
                   {' '}
                   <Link to="/favorite">Favorite</Link>
                 </Nav.Link>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item>Action</NavDropdown.Item>
-                  <NavDropdown.Item>Another action</NavDropdown.Item>
-                  <NavDropdown.Item>Something</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item>Separated link</NavDropdown.Item>
-                </NavDropdown>
               </Nav>
             </Navbar.Collapse>
           </Container>
