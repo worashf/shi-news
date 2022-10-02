@@ -16,9 +16,9 @@ const FullArticle = () => {
         Back{' '}
       </Link>
       <Card>
-        <Card.Img variant="top" src={urlToImage} />
+        <Card.Img variant="top" src={urlToImage} className="blog-img" />
         <Card.Body>
-          <Card.Title>{title}</Card.Title>
+          <Card.Title className="text-primary title ">{title}</Card.Title>
           <Card.Text>{description}</Card.Text>
         </Card.Body>
       </Card>
