@@ -24,8 +24,8 @@ export const getArticles = createAsyncThunk('article/getArticles', async () => {
 
 const initialState = {
   articles: [],
-  error: null,
   loading: false,
+  error: false,
 };
 
 const articleSlice = createSlice({
@@ -33,7 +33,17 @@ const articleSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getArticles.fulfilled]: (state, { payload }) => payload,
+    [getArticles.pending]: (state, { payload }) => {
+      state.loading = true;
+    },
+    [getArticles.fulfilled]: (state, { payload }) => {
+      state.articles = payload;
+      state.loading = false;
+    },
+    [getArticles.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = true;
+    },
   },
 });
 
