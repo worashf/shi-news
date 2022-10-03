@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Headline from './componets/Headline';
 import FullArticle from './componets/FullArticle';
 import { getArticles } from './redux/articles/articles';
+import Favorite from './componets/Favorite';
 import './App.css';
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
               {' '}
             </Route>
             <Route path="/full-article/:id" element={<FullArticle />} />
+            <Route path="/favorite" element={<Favorite />} />
           </Routes>
         </header>
       </div>
