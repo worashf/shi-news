@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Alert } from 'react-bootstrap';
 /*  eslint-disable */
 
 const FullArticle = () => {
@@ -10,6 +10,22 @@ const FullArticle = () => {
   const articles = useSelector((state) => state.articles.articles);
   const article = articles.find((a) => a.id === id);
   const { title, description, urlToImage, author, url, content } = article;
+
+  const saveToFavorite = (article) => {
+    let favArray;
+    if (localStorage.getItem('favObj') === null) {
+      favArray = [];
+      favArray.push(article);
+      localStorage.setItem('favObj', JSON.stringify(favArray));
+      <Alert>text</Alert>;
+    } else {
+      favArray = JSON.parse(localStorage.getItem('favObj'));
+      favArray.push(article);
+      localStorage.setItem('favObj', JSON.stringify(favArray));
+      <Alert>text</Alert>;
+    }
+  };
+
   return (
     <div className="container my-3">
       <Card>
@@ -29,7 +45,12 @@ const FullArticle = () => {
               Source
             </a>
           </Button>
-          <Button className="mx-3 btn btn-md">Save favorite</Button>
+          <Button
+            className="mx-3 btn btn-md"
+            onClick={() => saveToFavorite(article)}
+          >
+            Save favorite
+          </Button>
           <Link to="/" className="btn btn-primary my-3">
             Back{' '}
           </Link>
