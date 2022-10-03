@@ -11,10 +11,7 @@ const FullArticle = () => {
   const article = articles.find((a) => a.id === id);
   const { title, description, urlToImage, author, url, content } = article;
   return (
-    <div className="container">
-      <Link to="/" className="btn btn-primary my-3">
-        Back{' '}
-      </Link>
+    <div className="container my-3">
       <Card>
         <Card.Img variant="top" src={urlToImage} className="blog-img" />
         <Card.Body>
@@ -33,6 +30,9 @@ const FullArticle = () => {
             </a>
           </Button>
           <Button className="mx-3 btn btn-md">Save favorite</Button>
+          <Link to="/" className="btn btn-primary my-3">
+            Back{' '}
+          </Link>
         </Card.Body>
       </Card>
     </div>
