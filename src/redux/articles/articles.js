@@ -14,7 +14,8 @@ export const getArticles = createAsyncThunk('article/getArticles', async () => {
       author: a.author,
       urlToImage: a.urlToImage,
       content: a.content,
-      createdDate: a.publishedAts,
+      createdDate: a.publishedAt,
+      url: a.url,
     }));
 
     console.log(articles, '00000000000000000000000');
