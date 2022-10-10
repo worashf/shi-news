@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Nav, Navbar, Container, Row, Col,
+  Nav, Navbar, Container, Row, Col, NavDropdown,
 } from 'react-bootstrap';
 
 /* eslint-disable */
@@ -64,6 +64,16 @@ function App() {
                   {' '}
                   <Link to="/favorite">Favorite</Link>
                 </Nav.Link>
+                <NavDropdown
+                  className=""
+                  title="Search by Category"
+                  id="basic-dropdown-menu"
+                >
+                  <NavDropdown.Item>Technology</NavDropdown.Item>
+                  <NavDropdown.Item>Bussiness</NavDropdown.Item>
+                  <NavDropdown.Item>Sports</NavDropdown.Item>
+                  <NavDropdown.Item>Health</NavDropdown.Item>
+                </NavDropdown>
               </Nav>
             </Navbar.Collapse>
           </Container>
