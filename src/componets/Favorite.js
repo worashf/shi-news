@@ -11,9 +11,9 @@ const Favorite = () => {
     } = article;
 
     return (
-      <Col key={index}>
+      <Col key={index} className="news-container">
         <Headline
-          className="my-3"
+          className="my-3 mx-auto news-container"
           title={title}
           description={description}
           urlToImage={urlToImage}

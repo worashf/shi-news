@@ -8,14 +8,14 @@ import { Card } from 'react-bootstrap';
 const Headline = ({ title, description, urlToImage, article, id }) => {
   return (
     <div>
-      <Card style={{ width: '23rem' }} className="mt-2">
+      <Card style={{ width: '23rem', height: '25rem' }} className="mt-2">
         <Card.Img
           variant="top"
           src={urlToImage}
-          style={{ width: '100%', height: '15rem' }}
+          style={{ width: '100%', height: '10rem' }}
         />
         <Card.Body>
-          <Card.Title>{title}</Card.Title>
+          <Card.Title>{title ? `${title.substr(0, 50)}` : ''}</Card.Title>
           <Card.Text>
             {description ? `${description.substr(0, 60)}...` : ''}
           </Card.Text>

@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 import {
-  Nav, Navbar, Container, Row, Col,
+  Nav,
+  Navbar,
+  Container,
+  Row,
+  Col,
+  NavDropdown,
+  Dropdown,
 } from 'react-bootstrap';
 
 /* eslint-disable */
@@ -10,6 +16,7 @@ import Headline from './componets/Headline';
 import FullArticle from './componets/FullArticle';
 import { getArticles } from './redux/articles/articles';
 import Favorite from './componets/Favorite';
+import CategoryNews from './componets/CategoryNews';
 import './App.css';
 
 function App() {
@@ -17,7 +24,6 @@ function App() {
   const { articles, loading, error } = data;
 
   const dispatch = useDispatch();
-  console.log(articles, 'text');
   useEffect(() => {
     dispatch(getArticles());
   }, []);
@@ -64,6 +70,17 @@ function App() {
                   {' '}
                   <Link to="/favorite">Favorite</Link>
                 </Nav.Link>
+                <NavDropdown
+                  className=""
+                  title="Search by Category"
+                  id="basic-dropdown-menu"
+                >
+                  <Dropdown.Item href="/technology">Technology</Dropdown.Item>
+
+                  <Dropdown.Item>Bussiness</Dropdown.Item>
+                  <Dropdown.Item>Sports</Dropdown.Item>
+                  <Dropdown.Item>Health</Dropdown.Item>
+                </NavDropdown>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -71,6 +88,10 @@ function App() {
 
         <header className="App-header ">
           <Routes>
+            <Route
+              path="/technology"
+              element={<CategoryNews category={'technology'}></CategoryNews>}
+            />
             <Route
               path="/"
               element={
